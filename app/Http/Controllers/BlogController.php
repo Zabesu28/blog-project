@@ -11,9 +11,19 @@ class BlogController extends Controller
     /**
      * Affiche une liste des articles de blog.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::with('category')->orderBy('created_at', 'desc')->get();
+        $query = Blog::with('category')->orderBy('created_at', 'desc');
+
+        // Filtrer par recherche si le champ "search" est présent
+        if ($request->has('search') && $request->input('search') !== null) {
+            $search = $request->input('search');
+            $query->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('author', 'like', "%{$search}%");
+        }
+        //$blogs = Blog::with('category')->orderBy('created_at', 'desc')->get();
+        $blogs = $query->get(); // Récupère les articles filtrés
         return view('blogs.index', compact('blogs'));
     }
 

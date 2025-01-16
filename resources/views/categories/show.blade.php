@@ -1,30 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Liste des blogs')
-
 @section('content')
-<div class="row my-5">
-    <div class="col-12">
-        <h1 class="pb-3 border-bottom">Liste des blogs</h1>
-        <a href="{{ route('blogs.create') }}" class="btn btn-success mb-3">Ajouter un blog</a>
-        <form action="{{ route('blogs.index') }}" method="GET" class="mb-4">
-            <div class="input-group">
-                <input 
-                    type="text" 
-                    name="search" 
-                    class="form-control" 
-                    placeholder="Rechercher un article (titre, contenu, auteur)" 
-                    value="{{ request('search') }}">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div>
-        </form>
-        
-        @if(session('success'))
-        <p class="alert alert-success">{{ session('success') }}</p>
-        @endif
-
+    <div class="container">
+        <h1>Articles de la catégorie : {{ $category->name }}</h1>
+        <br>
+        <br>
         <div class="row">
-            @forelse($blogs as $blog)
+            @foreach ($blogs as $blog)
             <div class="col-md-4 mb-4">
                 <div class="card d-flex flex-column" style="height: 100%;">
                     @if($blog->image)
@@ -60,12 +42,7 @@
                     </div>
                 </div>
             </div>
-            @empty
-            <div class="col-12">
-                <p class="text-center">Aucun article de blog trouvé.</p>
+            @endforeach
             </div>
-            @endforelse
-        </div>
     </div>
-</div>
 @endsection
