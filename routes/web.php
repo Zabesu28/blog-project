@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
 
 Route::prefix('blogs')->name('blogs.')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('index');
@@ -15,4 +16,10 @@ Route::prefix('blogs')->name('blogs.')->group(function () {
     Route::put('/{id}', [BlogController::class, 'update'])->name('update');
 
     Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
+
+    //Contact 
+    //Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    //Route::post('/contact', [ContactController::class, 'sendContactMail']);
 });
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'sendContactMail']);

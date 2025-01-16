@@ -32,6 +32,9 @@
                   <li><a class="dropdown-item" href="/blogs/create">Ajouter un blog</a></li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ url('contact') }}">Contact</a>
+              </li>
             </ul>
           </div>
         </div>
