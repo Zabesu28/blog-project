@@ -32,6 +32,15 @@
                   <li><a class="dropdown-item" href="/blogs/create">Ajouter un blog</a></li>
                 </ul>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/categories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Catégories
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/categories">Liste</a></li>
+                  <li><a class="dropdown-item" href="/categories/create">Ajouter une catégorie</a></li>
+                </ul>
+              </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{ url('contact') }}">Contact</a>
               </li>

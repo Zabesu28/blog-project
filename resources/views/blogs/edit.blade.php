@@ -35,6 +35,18 @@
             <input type="text" name="author" id="author" class="form-control" value="{{ old('author', $blog->author) }}" required>
         </div>
 
+        <div class="form-group">
+            <label for="category_id">Catégorie</label>
+            <select name="category_id" id="category_id" class="form-control" required>
+                <option value="" disabled>Sélectionnez une catégorie</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ old('category_id', $blog->category_id) == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <br>
         <div class="form-group">
             <label for="image">Image</label>

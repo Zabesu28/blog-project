@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
@@ -12,7 +13,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $blogs = Blog::with('category')->orderBy('created_at', 'desc')->get();
         return view('blogs.index', compact('blogs'));
     }
 
@@ -21,7 +22,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.create');
+        $categories = Category::all();
+        return view('blogs.create', compact('categories'));
     }
 
     /**
@@ -33,6 +35,7 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'author' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -45,6 +48,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'author' => $request->author,
+            'category_id' => $request->category_id,
             'image' => $imagePath,
         ]);
 
@@ -66,7 +70,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-        return view('blogs.edit', compact('blog'));
+        $categories = Category::all();
+        return view('blogs.edit', compact('blog', 'categories'));
     }
 
     /**
@@ -78,6 +83,7 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required',
             'author' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -92,6 +98,7 @@ class BlogController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'author' => $request->author,
+            'category_id' => $request->category_id,
             'image' => $imagePath,
         ]);
 

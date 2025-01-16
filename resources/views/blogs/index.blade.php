@@ -26,6 +26,8 @@
                         <p class="card-text">
                             <strong>Auteur :</strong> {{ $blog->author }}<br>
                             <strong>Publié le :</strong> {{ $blog->created_at->format('d/m/Y') }}
+                            <br>
+                            <strong>Catégorie :</strong> {{ $blog->category->name }}
                         </p>
                         <div class="d-flex justify-content-between mt-auto">
                             <a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-primary btn-sm">

@@ -34,6 +34,19 @@
             <input type="text" name="author" id="author" class="form-control" value="{{ old('author') }}" required>
         </div>
 
+        <!-- Sélectionner une catégorie -->
+        <div class="form-group">
+            <label for="category_id">Catégorie</label>
+            <select name="category_id" id="category_id" class="form-control" required>
+                <option value="">Sélectionner une catégorie</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <br>
         <div class="form-group">
             <label for="image">Image</label>

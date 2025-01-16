@@ -17,6 +17,7 @@
         <div class="col-md-4">
             <p><strong>Auteur :</strong> {{ $blog->author }}</p>
             <p><strong>Publié le :</strong> {{ $blog->created_at->format('d/m/Y') }}</p>
+            <strong>Catégorie :</strong> {{ $blog->category->name }}
         </div>
     </div>
 
