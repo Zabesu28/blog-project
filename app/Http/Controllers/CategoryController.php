@@ -55,13 +55,4 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('categories.index')->with('success', 'Catégorie supprimée avec succès.');
     }
-
-    public function show($id)
-{
-    $category = Category::with('blogs')->findOrFail($id);
-    $blogs = $category->blogs; // Récupère les blogs liés à cette catégorie
-    $categories = Category::all(); // Si vous souhaitez afficher toutes les catégories dans la vue
-
-    return view('categories.show', compact('category', 'blogs', 'categories'));
-}
 }

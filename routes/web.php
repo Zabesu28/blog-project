@@ -18,12 +18,11 @@ Route::prefix('blogs')->name('blogs.')->group(function () {
     Route::put('/{id}', [BlogController::class, 'update'])->name('update');
 
     Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
+    
 });
 
 Route::prefix('categories')->name('categories.')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('index');
-
-    Route::get('/show/{id}', [CategoryController::class, 'show'])->name('show');
 
     Route::get('/create', [CategoryController::class, 'create'])->name('create');
     Route::post('/', [CategoryController::class, 'store'])->name('store');

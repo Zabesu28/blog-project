@@ -38,7 +38,7 @@
                             <strong>Auteur :</strong> {{ $blog->author }}<br>
                             <strong>Publié le :</strong> {{ $blog->created_at->format('d/m/Y') }}
                             <br>
-                            <strong>Catégorie :</strong> <a class="btn btn-primary btn-sm" href="{{ route('categories.show', $blog->category->id) }}">
+                            <strong>Catégorie :</strong> <a class="btn btn-primary btn-sm" href="{{ route('blogs.index', ['category' => $blog->category->id]) }}">
                                 {{ $blog->category->name }}
                             </a>
                         </p>

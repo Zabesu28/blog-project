@@ -8,24 +8,32 @@ use App\Models\Category;
 
 class BlogController extends Controller
 {
-    /**
-     * Affiche une liste des articles de blog.
-     */
     public function index(Request $request)
     {
         $query = Blog::with('category')->orderBy('created_at', 'desc');
-
-        // Filtrer par recherche si le champ "search" est présent
+    
+        // Recherche
         if ($request->has('search') && $request->input('search') !== null) {
             $search = $request->input('search');
-            $query->where('title', 'like', "%{$search}%")
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
                   ->orWhere('content', 'like', "%{$search}%")
                   ->orWhere('author', 'like', "%{$search}%");
+            });
         }
-        //$blogs = Blog::with('category')->orderBy('created_at', 'desc')->get();
-        $blogs = $query->get(); // Récupère les articles filtrés
-        return view('blogs.index', compact('blogs'));
+    
+        // Filtrer par catégorie 
+        if ($request->has('category') && $request->input('category') !== null) {
+            $categoryId = $request->input('category');
+            $query->where('category_id', $categoryId);
+        }
+    
+        $blogs = $query->get(); 
+        $categories = Category::all(); 
+        return view('blogs.index', compact('blogs', 'categories'));
     }
+    
+    
 
     /**
      * Affiche le formulaire pour créer un nouvel article.
